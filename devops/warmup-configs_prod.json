@@ -1,0 +1,73 @@
+{
+    "projectName":"WARMUP_SKY",
+    "tools":{
+        "warmup":{
+            "version": 52
+        },
+        "docker":{
+            "dockerfilePath": "./devops",
+            "containerName": "warmup_slave_image_repository",
+            "containerTagPrefix": "jenkins-warmup-agent",
+            "registry": {
+                "protocol": "https",
+                "endpoint": "xxxx",
+                "region": "xx"
+            }
+        }
+    },
+    "email":{
+        "sender": "andrea.deldottore.accenture@skytv.it",
+        "recipient": "andrea.deldottore.accenture@skytv.it"
+    },
+    "stages":{
+        "cleanCachedAPIResponse":{
+            "full":{
+                "dml": "SELECT Id FROM vlocity_cmt__CachedAPIResponse__c"
+            },
+            "partial":{
+                "dml": "SELECT Id FROM vlocity_cmt__CachedAPIResponse__c PARTIAL"
+            }
+        },
+        "activeMaintenanceMode":{
+            "dml": "select id,name,vlocity_cmt__SetupValue__c from vlocity_cmt__CpqConfigurationSetup__c  where name='DC Maintenance Mode'"
+        },
+        "apexInvoke":{
+            "apex": "CMTAdminJobService.startProductHierarchyMaintenanceJob",
+            "pricebookId": [
+                "1",
+                "2",
+                "3"
+            ]
+        },
+        "cacheOrchestrator":{
+        },
+        "deactivateMaintenanceMode":{
+            "dml": "select id,name,vlocity_cmt__SetupValue__c from vlocity_cmt__CpqConfigurationSetup__c  where name='DC Maintenance Mode'"  
+        },
+        "flushCacheAWS":{
+            "filepath": "FlushCacheAWS/prod/FlushCacheAWSTarget.txt",
+            "request": "GET"
+        },
+        "warmupWSCBB":{
+            "collection": "Collection BB.collection.json"
+        },
+        "warmupTopStrategy":{
+            "collection": "topStrategy.collection.json" 
+        },
+        "warmupLlama":{
+            "collection": "Warmup Llama.collection.json"
+        },
+        "motorino3p":{
+            "filepath": "Motorino3p/prod/AllCombinazioni3P.txt",
+            "row": 250,
+            "delay": 30,
+            "request": "GET"
+        },
+        "warmupWSC":{
+            "collection": "Warmup wsc_collection.json"
+        },
+        "warmupNSPI":{
+            "collection": "Warmup wsc_collection.json"
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "projectName": "SFDC_Arcadia",
+    "vendors": [
+        "ACN",
+        "NTT",
+        "PWC",
+        "VLT"
+    ],
+     "sourceAlert": {
+        "warning": [],
+        "error": ["*.namedCredential-meta.xml"]
+    },
+    "tools": {
+        "salesforce": {
+            "version": 52
+        },
+        "docker": {
+            "dockerfilePath": "./devops",
+            "containerName": "salesforce_slave_image_repository",
+            "containerTagPrefix": "jenkins-salesforce-agent",
+            "registry": {
+                "accountId": "642521649409",
+                "protocol": "https",
+                "endpoint": "642521649409.dkr.ecr.eu-west-1.amazonaws.com/jenkins-container-templates/salesforce_slave_image_repository",
+                "region": "eu-west-1"
+            }
+        },
+        "nexus": {
+            "protocol": "http",
+            "url": "nexus.cicd.prod.sky.aws:8080",
+            "credentialId": "jenkins_user_nexus",
+            "repository": {
+                "name": "ita-salesforce-cicd",
+                "groupId": "it.sky",
+                "artifactId": "sfdc_arcadia"
+            }
+        },
+        "elasticsearch": {
+            "protocol": "http",
+            "url": "10.170.242.181",
+            "port": 9200
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "packageDirectories": [{
+        "path": "{_packageDirectoriesPath_}",
+        "default": true
+    }],
+    "namespace": "",
+    "sfdcLoginUrl": "{_sfdcLoginUrl_}",
+    "sourceApiVersion": "{_sourceApiVersion_}.0"
+}
