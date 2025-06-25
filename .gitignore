@@ -1,0 +1,10 @@
+.idea/
+**/.idea/
+.DS_STORE
+build.gradle
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+lib/groovy*.jar
+*.iml
